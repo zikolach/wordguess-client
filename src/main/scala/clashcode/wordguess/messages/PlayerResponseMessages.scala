@@ -5,7 +5,12 @@ package clashcode.wordguess.messages
  */
 
 // Reflects the (partial) status of a game. Unsolved letters are "None". 
-case class GameStatus(gameId: Int, letters: Seq[Option[Char]], remainingTries: Int)
+case class GameStatus(gameId: Int, letters: Seq[Option[Char]], remainingTries: Int) {
+  override def toString = s"${gameId}:  ${letters.map({
+    case Some(c) => c
+    case None => "_"
+  }).mkString(" ")}  $remainingTries"
+}
 
 abstract class GameOver
 case class GameWon(finalStatus: GameStatus) extends GameOver
